@@ -678,7 +678,7 @@ jobs:
 
     steps:
       - name: Tag Docker image
-        run: docker tag renovate/renovate:full herreraalison041/renovate:full
+        run: docker tag docker.io/renovate/renovate:full herreraalison041/renovate:full
 
       - name: Push Docker image
         run: docker push herreraalison041/renovate:full
