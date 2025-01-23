@@ -563,6 +563,15 @@ jobs:
         env:
           LOG_LEVEL: debug
 
+      - name: List Docker Images
+        run: docker images
+
+      - name: Tag Docker image
+        run: docker tag docker.io/renovate/renovate:full herreraalison041/renovate:full
+
+      - name: Push Docker image
+        run: docker push herreraalison041/renovate:full
+
       - name: Pack
         run: pnpm test-e2e:pack
 
@@ -675,10 +684,3 @@ jobs:
       pull-requests: write
       id-token: write
       packages: write
-
-    steps:
-      - name: Tag Docker image
-        run: docker tag docker.io/renovate/renovate:full herreraalison041/renovate:full
-
-      - name: Push Docker image
-        run: docker push herreraalison041/renovate:full
