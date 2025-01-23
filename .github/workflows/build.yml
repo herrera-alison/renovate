@@ -666,7 +666,7 @@ jobs:
       - codecov
       - coverage-threshold
 
-    if: github.repository == 'renovatebot/renovate' && github.event_name != 'pull_request'
+    if: github.repository == 'herrera-alison/renovate' && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 60
     permissions:
@@ -710,6 +710,15 @@ jobs:
           elif [[ "${{github.ref}}" =~ ^refs/heads/v[0-9]+(\.[0-9]+)?$ ]]; then
             echo "DRY_RUN=false" >> "$GITHUB_ENV"
           fi
+
+      - name: Pull Docker image
+        run: docker pull herrera-alison:latest
+
+      - name: Tag Docker image
+        run: docker tag herrera-alison/renovate:latest herreraalison041/renovate:latest
+
+      - name: Push Docker image
+        run: docker push herreraalison041/renovate:latest
 
       - name: semantic-release
         run: |
