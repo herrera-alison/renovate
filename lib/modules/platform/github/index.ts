@@ -1769,6 +1769,7 @@ export async function updatePr({
   number: prNo,
   prTitle: title,
   prBody: rawBody,
+  prComments,
   addLabels: labelsToAdd,
   removeLabels,
   state,
@@ -1813,6 +1814,25 @@ export async function updatePr({
     const result = coerceRestPr(ghPr);
     cachePr(result);
     logger.debug(`PR updated...prNo: ${prNo}`);
+
+    if (prComments) {
+      for (let i = 0; i < prComments.length; i++) {
+        const comment = prComments[i];
+        const commentOptions: any = {
+          body: comment,
+        };
+        // istanbul ignore if
+        if (config.forkToken) {
+          commentOptions.token = config.forkToken;
+        }
+        await githubApi.patchJson<GhRestPr>(
+          `repos/${config.parentRepo ?? config.repository}/issues/pulls/${prNo}/comments`,
+          options,
+        );
+        logger.debug(`PR comment added...prNo: ${prNo}`);
+      }
+    }
+
   } catch (err) /* istanbul ignore next */ {
     if (err instanceof ExternalHostError) {
       throw err;
@@ -1935,7 +1955,7 @@ export async function mergePr({
   return true;
 }
 
-export function massageMarkdown(input: string): string {
+export function massageMarkdown(input: string): object {
   if (platformConfig.isGhe) {
     return smartTruncate(input, maxBodyLength());
   }
