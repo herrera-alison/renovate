@@ -58,7 +58,7 @@ export function ensureIssue(): Promise<null> {
   return Promise.resolve(null);
 }
 
-export function massageMarkdown(input: string): string {
+export function massageMarkdown(input: string): object {
   return input;
 }
 

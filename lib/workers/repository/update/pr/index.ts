@@ -394,7 +394,7 @@ export async function ensurePr(
         prTitle,
         prBody,
         platformPrOptions: getPlatformPrOptions(config),
-        prComments
+        prComments,
       };
       // PR must need updating
       if (existingPr?.targetBranch !== config.baseBranch) {

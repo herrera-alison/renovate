@@ -570,7 +570,7 @@ async function closeIssue(issueNumber: number): Promise<void> {
   );
 }
 
-export function massageMarkdown(input: string): string {
+export function massageMarkdown(input: string): object {
   // Remove any HTML we use
   return smartTruncate(input, maxBodyLength())
     .replace(

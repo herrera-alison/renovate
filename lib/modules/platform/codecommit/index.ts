@@ -301,7 +301,7 @@ export async function getRepos(): Promise<string[]> {
   return res;
 }
 
-export function massageMarkdown(input: string): string {
+export function massageMarkdown(input: string): object {
   // Remove any HTML we use
   return input
     .replace(

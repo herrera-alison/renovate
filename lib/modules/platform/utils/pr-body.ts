@@ -9,7 +9,7 @@ export function smartTruncate(input: string, len: number): string {
   if (input.length < len) {
     return {
       first: input,
-      rest: []
+      rest: [],
     };
   }
 
@@ -17,7 +17,7 @@ export function smartTruncate(input: string, len: number): string {
   if (!reMatch?.groups) {
     return {
       first: input.substring(0, len),
-      rest: []
+      rest: [],
     }
   }
 
@@ -27,18 +27,28 @@ export function smartTruncate(input: string, len: number): string {
   const postNotes = reMatch.groups.postNotes;
 
   //Check the available length taking the maxim and substrating out the boilerplate length. Check if there is enough space for the release notes
-  const availableLength = len - (preNotes.length + postNotes.length + divider.length);
+  const availableLength =
+    len - (preNotes.length + postNotes.length + divider.length);
 
   if (availableLength <= 0) {
     return splitStringAndSeparateFirst(input, len, len);
   } else {
-    const parts = splitStringAndSeparateFirst(releaseNotes, availableLength, len);
+    const parts = splitStringAndSeparateFirst(
+      releaseNotes,
+      availableLength,
+      len,
+    );
     parts.first = preNotes + parts.first + divider + postNotes;
     return parts;
   }
 }
 
-function splitStringAndSeparateFirst(str: string, firstMaxLength: number, maxLength: number): object {
+function splitStringAndSeparateFirst(
+  str: string,
+  firstMaxLength:
+  number,
+  maxLength: number,
+): object {
   // Call the splitString function to get the array of string parts
   const stringParts = splitString(str, firstMaxLength, maxLength);
 
@@ -49,11 +59,15 @@ function splitStringAndSeparateFirst(str: string, firstMaxLength: number, maxLen
   // Return the first part separately and the rest as a list
   return {
     first: firstPart,
-    rest: remainingParts
+    rest: remainingParts,
   };
 }
 
-function splitString(str: string, firstMaxLength: number, maxLength: number): string[] {
+function splitString(
+  str: string,
+  firstMaxLength: number,
+  maxLength: number,
+): string[] {
   const result: string[] = [];
   let remainingStr = str;
 

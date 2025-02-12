@@ -1832,7 +1832,6 @@ export async function updatePr({
         logger.debug(`PR comment added...prNo: ${prNo}`);
       }
     }
-
   } catch (err) /* istanbul ignore next */ {
     if (err instanceof ExternalHostError) {
       throw err;

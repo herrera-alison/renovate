@@ -1126,7 +1126,7 @@ export async function mergePr({
   return true;
 }
 
-export function massageMarkdown(input: string): string {
+export function massageMarkdown(input: string): object {
   logger.debug(`massageMarkdown(${input.split(newlineRegex)[0]})`);
   // Remove any HTML we use
   return smartTruncate(input, maxBodyLength())

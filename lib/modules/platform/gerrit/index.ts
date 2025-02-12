@@ -384,7 +384,7 @@ export async function ensureComment(
   return true;
 }
 
-export function massageMarkdown(prBody: string): string {
+export function massageMarkdown(prBody: string): object {
   //TODO: do more Gerrit specific replacements?
   return smartTruncate(readOnlyIssueBody(prBody), maxBodyLength())
     .replace(regEx(/Pull Request(s)?/g), 'Change-Request$1')
