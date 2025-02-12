@@ -18,7 +18,7 @@ export function smartTruncate(input: string, len: number): string {
     return {
       first: input.substring(0, len),
       rest: [],
-    }
+    };
   }
 
   const divider = `\n\n</details>\n\n---\n\n### Configuration`;
@@ -45,8 +45,7 @@ export function smartTruncate(input: string, len: number): string {
 
 function splitStringAndSeparateFirst(
   str: string,
-  firstMaxLength:
-  number,
+  firstMaxLength: number,
   maxLength: number,
 ): object {
   // Call the splitString function to get the array of string parts
