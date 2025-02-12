@@ -330,7 +330,7 @@ export async function ensurePr(
     }
   }
 
-  const prBody = getPrBody(
+  const prParts = getPrBody(
     config,
     {
       debugData: updatePrDebugData(
@@ -341,6 +341,9 @@ export async function ensurePr(
     },
     config,
   );
+
+  const prBody = prParts.body;
+  const prComments = prParts.comments;
 
   try {
     if (existingPr) {
@@ -391,6 +394,7 @@ export async function ensurePr(
         prTitle,
         prBody,
         platformPrOptions: getPlatformPrOptions(config),
+        prComments
       };
       // PR must need updating
       if (existingPr?.targetBranch !== config.baseBranch) {
