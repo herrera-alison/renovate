@@ -137,6 +137,6 @@ export function getPrBody(
   }
   return {
     body: prBody,
-    comments: prComments
+    comments: prComments,
   };
 }
